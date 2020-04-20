@@ -9,6 +9,8 @@ services:
         PHP_UPSTREAM_PORT: 9000
     volumes:
       - wordpress:/var/www/html:ro
+      - ${WORDPRESS_THEME_HOST_PATH}:/var/www/html/wp-content/themes:ro
+      - ${WORDPRESS_PLUGINS_HOST_PATH}:/var/www/html/wp-content/plugins:ro
       - ${NGINX_HOST_LOG_PATH}:/var/log/nginx
       - ${NGINX_SITE_PATH}:/etc/nginx/sites-enabled:cached
     ports:
