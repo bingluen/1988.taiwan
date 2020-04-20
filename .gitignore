@@ -6,3 +6,12 @@ data/*
 !wordpress-plugins/.gitkeep
 !wordpress-themes/.gitkeep
 !logs/.gitkeep
+
+
+# plugins from 邦訊
+!wordpress-plugins/elementor
+!wordpress-plugins/ninja-tables
+!wordpress-plugins/ninja-tables-pro
+
+# themes from 邦訊
+!wordpress-themes/astra
