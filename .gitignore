@@ -1,0 +1,8 @@
+.env
+wordpress-plugins/*
+wordpress-themes/*
+logs/*
+data/*
+!wordpress-plugins/.gitkeep
+!wordpress-themes/.gitkeep
+!logs/.gitkeep
