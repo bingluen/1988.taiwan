@@ -15,6 +15,7 @@ data/uploads/*
 !wordpress-plugins/elementor
 !wordpress-plugins/ninja-tables
 !wordpress-plugins/ninja-tables-pro
+!wordpress-plugins/wp-fastest-cache
 
 # themes from 邦訊
 !wordpress-themes/astra
