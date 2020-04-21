@@ -33,6 +33,7 @@ services:
       WORDPRESS_DB_USER: ${MARIADB_USER}
       WORDPRESS_DB_PASSWORD: ${MARIADB_PASSWORD}
       WORDPRESS_DB_NAME: ${MARIADB_DATABASE}
+      WORDPRESS_DB_COLLATE: utf8mb4_unicode_ci
     volumes:
       - wordpress:/var/www/html
       - ${WORDPRESS_UPLOAD_HOST_PATH}:/var/www/html/wp-content/uploads
@@ -54,6 +55,7 @@ services:
       - MYSQL_USER=${MARIADB_USER}
       - MYSQL_PASSWORD=${MARIADB_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     networks:
       - backend
   
