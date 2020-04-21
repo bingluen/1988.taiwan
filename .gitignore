@@ -22,3 +22,6 @@ data/uploads/*
 
 # languages of plugins from 邦訊
 !wordpress-languages/plugins
+
+# languages of wordpress
+!wordpress-languages/zh_TW.mo
