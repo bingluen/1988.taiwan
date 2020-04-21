@@ -9,8 +9,10 @@ services:
         PHP_UPSTREAM_PORT: 9000
     volumes:
       - wordpress:/var/www/html:ro
+      - ${WORDPRESS_UPLOAD_HOST_PATH}:/var/www/html/wp-content/uploads
       - ${WORDPRESS_THEME_HOST_PATH}:/var/www/html/wp-content/themes:ro
       - ${WORDPRESS_PLUGINS_HOST_PATH}:/var/www/html/wp-content/plugins:ro
+      - ${WORDPRESS_PLUGINS_LANGUAGES_PATH}:/var/www/html/wp-content/languages/plugins:ro
       - ${NGINX_HOST_LOG_PATH}:/var/log/nginx
       - ${NGINX_SITE_PATH}:/etc/nginx/sites-enabled:cached
     ports:
@@ -33,8 +35,10 @@ services:
       WORDPRESS_DB_NAME: ${MARIADB_DATABASE}
     volumes:
       - wordpress:/var/www/html
+      - ${WORDPRESS_UPLOAD_HOST_PATH}:/var/www/html/wp-content/uploads
       - ${WORDPRESS_THEME_HOST_PATH}:/var/www/html/wp-content/themes:cached
       - ${WORDPRESS_PLUGINS_HOST_PATH}:/var/www/html/wp-content/plugins:cached
+      - ${WORDPRESS_PLUGINS_LANGUAGES_PATH}:/var/www/html/wp-content/languages/plugins:cached
     networks:
       - backend
     
