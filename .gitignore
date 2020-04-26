@@ -1,11 +1,14 @@
 .env
+wordpress-admin/*
 wordpress-plugins/*
 wordpress-themes/*
 wordpress-languages/*
 logs/*
 data/*
+!wordpress-admin/.gitkeep
 !wordpress-plugins/.gitkeep
 !wordpress-themes/.gitkeep
+!wordpress-languages/.gitkeep
 !logs/.gitkeep
 !data/uploads
 data/uploads/*
@@ -25,3 +28,7 @@ data/uploads/*
 
 # languages of wordpress
 !wordpress-languages/zh_TW.mo
+
+# admins from 邦訊
+!wordpress-admins/js/wp-fullscreen-stub.js
+!wordpress-admins/js/wp-fullscreen-stub.min.js
