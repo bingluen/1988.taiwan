@@ -1,0 +1,74 @@
+version: "3"
+
+services:
+  nginx:
+    build:
+      context: "./nginx"
+      args:
+        PHP_UPSTREAM_CONTAINER: wordpress
+        PHP_UPSTREAM_PORT: 9000
+    volumes:
+      - wordpress:/var/www/html:ro
+      - ${NGINX_HOST_LOG_PATH}:/var/log/nginx
+      - ${NGINX_SITE_PATH}:/etc/nginx/sites-enabled:cached
+    ports:
+      - "${NGINX_HOST_HTTP_PORT}:80"
+    depends_on:
+      - wordpress
+    networks:
+      - backend
+      - frontend
+  
+  wordpress:
+    image: "wordpress:5.4.0-php7.4-fpm-alpine"
+    restart: always
+    expose:
+      - 9000
+    environment:
+      WORDPRESS_DB_HOST: mariadb
+      WORDPRESS_DB_USER: ${MARIADB_USER}
+      WORDPRESS_DB_PASSWORD: ${MARIADB_PASSWORD}
+      WORDPRESS_DB_NAME: ${MARIADB_DATABASE}
+    volumes:
+      - wordpress:/var/www/html
+      - ${WORDPRESS_THEME_HOST_PATH}:/var/www/html/wp-content/themes:cached
+      - ${WORDPRESS_PLUGINS_HOST_PATH}:/var/www/html/wp-content/plugins:cached
+    networks:
+      - backend
+    
+  mariadb:
+    image: "mariadb:10.5-bionic"
+    volumes:
+      - ${DATA_PATH_HOST}/mariadb:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - TZ=${TIMEZONE}
+      - MYSQL_DATABASE=${MARIADB_DATABASE}
+      - MYSQL_USER=${MARIADB_USER}
+      - MYSQL_PASSWORD=${MARIADB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+    networks:
+      - backend
+  
+  phpmyadmin:
+    build: ./phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - MYSQL_USER=${PMA_USER}
+      - MYSQL_PASSWORD=${PMA_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${PMA_ROOT_PASSWORD}
+    ports:
+      - "${PMA_PORT}:80"
+    depends_on:
+      - "${PMA_DB_ENGINE}"
+    networks:
+      - backend
+      - frontend
+
+volumes:
+  wordpress:
+
+networks:
+  backend:
+  frontend:
