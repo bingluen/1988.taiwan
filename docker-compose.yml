@@ -13,6 +13,7 @@ services:
       - ${WORDPRESS_THEME_HOST_PATH}:/var/www/html/wp-content/themes:ro
       - ${WORDPRESS_PLUGINS_HOST_PATH}:/var/www/html/wp-content/plugins:ro
       - ${WORDPRESS_LANGUAGES_PATH}:/var/www/html/wp-content/languages:ro
+      - ${ASSETS_HOST_PATH}:/var/www/html/assets:ro
       - ${NGINX_HOST_LOG_PATH}:/var/log/nginx
       - ${NGINX_SITE_PATH}:/etc/nginx/sites-enabled:cached
     ports:
@@ -40,6 +41,7 @@ services:
       - ${WORDPRESS_THEME_HOST_PATH}:/var/www/html/wp-content/themes:cached
       - ${WORDPRESS_PLUGINS_HOST_PATH}:/var/www/html/wp-content/plugins:cached
       - ${WORDPRESS_LANGUAGES_PATH}:/var/www/html/wp-content/languages:cached
+      - ${ASSETS_HOST_PATH}:/var/www/html/assets:ro
     networks:
       - backend
     
